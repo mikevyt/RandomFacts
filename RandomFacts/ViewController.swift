@@ -9,12 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+let fetcher = Fetcher()
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetcher.getRandomArticle()
+        print(fetcher.id)
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-
+    @IBAction func Click(_ sender: UIButton) {
+        fetcher.getRandomArticle()
+        print(fetcher.id)
+    }
+    
 }
 
