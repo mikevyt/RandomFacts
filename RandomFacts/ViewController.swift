@@ -7,19 +7,47 @@
 //
 
 import UIKit
+import SafariServices
 
 class ViewController: UIViewController {
-let fetcher = Fetcher()
+let buttonHeight = 50.0
+var currentArticle = Article()
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetcher.getRandomArticle()
-        print(fetcher.id)
-        // Do any additional setup after loading the view, typically from a nib.
+        randomButton.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
+        randomButton.layer.borderWidth = 3
+        randomButton.layer.borderColor = UIColor.white.cgColor
+        openButton.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
+        openButton.layer.borderWidth = 3
+        openButton.layer.borderColor = UIColor.white.cgColor
+        background.backgroundColor = getRandomBackground()
     }
-    @IBAction func Click(_ sender: UIButton) {
-        fetcher.getRandomArticle()
-        print(fetcher.id)
+    @IBOutlet var background: UIView!
+    @IBOutlet weak var randomButton: UIButton!
+    @IBOutlet weak var openButton: UIButton!
+    
+    @IBAction func randomize(_ sender: UIButton) {
+        background.backgroundColor = getRandomBackground()
+        let article = Article()
+        article.createArticle {
+            success in
+            self.currentArticle = article
+        }
+        
     }
     
+    
+    @IBAction func openPage(_ sender: UIButton) {
+        guard let url = URL(string: self.currentArticle.getLink()) else { return }
+        let svc = SFSafariViewController(url: url)
+        present(svc, animated: true, completion: nil)
+    }
+    
+    func getRandomBackground() -> UIColor {
+        let r = CGFloat(Float.random(in: 0.0...1.0))
+        let g = CGFloat(Float.random(in: 0.0...1.0))
+        let b = CGFloat(Float.random(in: 0.0...1.0))
+        return UIColor(red: r, green: g, blue: b, alpha: 1.0)
+    }
 }
 
