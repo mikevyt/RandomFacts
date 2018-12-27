@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import QuartzCore
 
 class ViewController: UIViewController {
 let buttonHeight = 50.0
@@ -20,9 +21,22 @@ var currentArticle = Article()
         openButton.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
         openButton.layer.borderWidth = 3
         openButton.layer.borderColor = UIColor.white.cgColor
+        descriptionText.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
+        titleText.layer.backgroundColor = UIColor.white.cgColor
+        titleText.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
         background.backgroundColor = getRandomBackground()
+        let article = Article()
+        article.createArticle {
+            success in
+            self.currentArticle = article
+            DispatchQueue.main.async {
+                self.updateScreen()
+            }
+        }
     }
     @IBOutlet var background: UIView!
+    @IBOutlet weak var titleText: UILabel!
+    @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var randomButton: UIButton!
     @IBOutlet weak var openButton: UIButton!
     
@@ -32,6 +46,9 @@ var currentArticle = Article()
         article.createArticle {
             success in
             self.currentArticle = article
+            DispatchQueue.main.async {
+                self.updateScreen()
+            }
         }
         
     }
@@ -48,6 +65,13 @@ var currentArticle = Article()
         let g = CGFloat(Float.random(in: 0.0...1.0))
         let b = CGFloat(Float.random(in: 0.0...1.0))
         return UIColor(red: r, green: g, blue: b, alpha: 1.0)
+    }
+    
+    func updateScreen() {
+        print(self.currentArticle.title)
+        print(self.currentArticle.description)
+        self.titleText.text = self.currentArticle.title
+        self.descriptionText.text = self.currentArticle.description
     }
 }
 

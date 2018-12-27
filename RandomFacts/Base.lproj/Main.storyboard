@@ -50,20 +50,41 @@
                                     <constraint firstItem="V78-dM-7W9" firstAttribute="height" secondItem="m9D-Bn-Ku5" secondAttribute="height" id="LaZ-qT-aOQ"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I4r-OQ-MtX">
+                                <rect key="frame" x="20" y="40" width="335" height="0.0"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="35"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ukp-YD-Vni">
+                                <rect key="frame" x="20" y="60" width="335" height="517"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Hq8-bS-lCD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3oZ-P5-P26"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Hq8-bS-lCD" secondAttribute="bottom" constant="20" id="GFS-lb-Lce"/>
+                            <constraint firstItem="Ukp-YD-Vni" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Hxr-SC-bDy"/>
+                            <constraint firstItem="Ukp-YD-Vni" firstAttribute="top" secondItem="I4r-OQ-MtX" secondAttribute="bottom" constant="20" id="J4O-8b-EOb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ukp-YD-Vni" secondAttribute="trailing" constant="20" id="PJj-nY-5cC"/>
+                            <constraint firstItem="Hq8-bS-lCD" firstAttribute="top" secondItem="Ukp-YD-Vni" secondAttribute="bottom" constant="20" id="RVP-4p-R07"/>
+                            <constraint firstItem="I4r-OQ-MtX" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="RwF-52-Nhj"/>
                             <constraint firstItem="Hq8-bS-lCD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Sri-En-4JV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hq8-bS-lCD" secondAttribute="trailing" constant="20" id="icS-88-OkY"/>
+                            <constraint firstItem="I4r-OQ-MtX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="sQM-bZ-d2x"/>
+                            <constraint firstItem="I4r-OQ-MtX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="xyt-BV-y9x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="background" destination="8bC-Xf-vdC" id="qlI-We-MMJ"/>
+                        <outlet property="descriptionText" destination="Ukp-YD-Vni" id="IYL-nG-Szg"/>
                         <outlet property="openButton" destination="m9D-Bn-Ku5" id="2sr-tj-raP"/>
                         <outlet property="randomButton" destination="V78-dM-7W9" id="EcU-jP-ueo"/>
+                        <outlet property="titleText" destination="I4r-OQ-MtX" id="Tuo-tk-2yT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
