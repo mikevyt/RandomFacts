@@ -85,6 +85,8 @@
                         <outlet property="openButton" destination="m9D-Bn-Ku5" id="2sr-tj-raP"/>
                         <outlet property="randomButton" destination="V78-dM-7W9" id="EcU-jP-ueo"/>
                         <outlet property="titleText" destination="I4r-OQ-MtX" id="Tuo-tk-2yT"/>
+                        <outletCollection property="buttons" destination="m9D-Bn-Ku5" collectionClass="NSMutableArray" id="vNb-YX-IDg"/>
+                        <outletCollection property="buttons" destination="V78-dM-7W9" collectionClass="NSMutableArray" id="w1R-zl-Tl1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

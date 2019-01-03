@@ -11,23 +11,18 @@ import SafariServices
 import QuartzCore
 
 class ViewController: UIViewController {
-let buttonHeight = 50.0
-var currentArticle = Article()
+    private let buttonHeight = 50.0
+    private var currentArticle = Article()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        randomButton.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
-        randomButton.layer.borderWidth = 3
-        randomButton.layer.borderColor = UIColor.white.cgColor
-        openButton.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
-        openButton.layer.borderWidth = 3
-        openButton.layer.borderColor = UIColor.white.cgColor
-        descriptionText.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
-        descriptionText.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-        titleText.layer.backgroundColor = UIColor.white.cgColor
-        titleText.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
         background.backgroundColor = getRandomBackground()
+        setupButtons()
+        setupLabels()
         getNewArticle()
     }
+    
+    @IBOutlet var buttons: [UIButton]!
     @IBOutlet var background: UIView!
     @IBOutlet weak var titleText: UILabel!
     @IBOutlet weak var descriptionText: UITextView!
@@ -38,7 +33,6 @@ var currentArticle = Article()
         background.backgroundColor = getRandomBackground()
         getNewArticle()
     }
-    
     
     @IBAction func openPage(_ sender: UIButton) {
         guard let url = URL(string: self.currentArticle.getLink()) else { return }
@@ -53,6 +47,21 @@ var currentArticle = Article()
         return UIColor(red: r, green: g, blue: b, alpha: 1.0)
     }
     
+    func setupButtons() {
+        for button in buttons {
+            button.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
+            button.layer.borderWidth = 3
+            button.layer.borderColor = UIColor.white.cgColor
+        }
+    }
+    
+    func setupLabels() {
+        descriptionText.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
+        descriptionText.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        titleText.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
+        titleText.layer.backgroundColor = UIColor.white.cgColor
+    }
+    
     func updateScreen() {
         self.titleText.text = self.currentArticle.title
         self.descriptionText.text = self.currentArticle.description
@@ -63,7 +72,8 @@ var currentArticle = Article()
         article.createArticle {
             success in
             self.currentArticle = article
-            if (self.currentArticle.description.range(of:"may refer to") != nil) {
+            if (self.currentArticle.description.range(of:"may refer") != nil || self.currentArticle.description.range(of:"can refer") != nil || self.currentArticle.description == "") {
+                print("getting new article")
                 self.getNewArticle()
             }
             DispatchQueue.main.async {
