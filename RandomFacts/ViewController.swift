@@ -22,17 +22,11 @@ var currentArticle = Article()
         openButton.layer.borderWidth = 3
         openButton.layer.borderColor = UIColor.white.cgColor
         descriptionText.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
+        descriptionText.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
         titleText.layer.backgroundColor = UIColor.white.cgColor
         titleText.layer.cornerRadius = CGFloat(buttonHeight / 2.0)
         background.backgroundColor = getRandomBackground()
-        let article = Article()
-        article.createArticle {
-            success in
-            self.currentArticle = article
-            DispatchQueue.main.async {
-                self.updateScreen()
-            }
-        }
+        getNewArticle()
     }
     @IBOutlet var background: UIView!
     @IBOutlet weak var titleText: UILabel!
@@ -42,15 +36,7 @@ var currentArticle = Article()
     
     @IBAction func randomize(_ sender: UIButton) {
         background.backgroundColor = getRandomBackground()
-        let article = Article()
-        article.createArticle {
-            success in
-            self.currentArticle = article
-            DispatchQueue.main.async {
-                self.updateScreen()
-            }
-        }
-        
+        getNewArticle()
     }
     
     
@@ -68,10 +54,22 @@ var currentArticle = Article()
     }
     
     func updateScreen() {
-        print(self.currentArticle.title)
-        print(self.currentArticle.description)
         self.titleText.text = self.currentArticle.title
         self.descriptionText.text = self.currentArticle.description
+    }
+    
+    func getNewArticle() {
+        let article = Article()
+        article.createArticle {
+            success in
+            self.currentArticle = article
+            if (self.currentArticle.description.range(of:"may refer to") != nil) {
+                self.getNewArticle()
+            }
+            DispatchQueue.main.async {
+                self.updateScreen()
+            }
+        }
     }
 }
 
