@@ -8,7 +8,6 @@ If the user is not interested, the user can choose "Randomize" again, and discov
 
 
 ## TODO:
-- account for articles that contain periods within the first sentence, and avoid cutting off early
 - adding images to article page
 - fix padding in title field
 - consider error cases
